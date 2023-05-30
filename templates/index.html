@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRISxTionary</title>
+
+  <link rel="stylesheet" href="../static/index/css/style.css">
+  <style> 
+    @import url('https://fonts.googleapis.com/css2?family=Sigmar&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
+    </style>
+  <script src="../static/index/scripts/script-nav.js" defer></script>
+  <script src="../static/index/scripts/script2.js" defer></script>
+  <script src="../static/jquery-3.6.4.min.js"></script>
+
+</head>
+
+<body>
+
+  <nav class="nav nav--active">
+    <ul class="nav__list">
+      <li class="nav__item">
+        <a href="" class="nav__link">
+          <div class="nav__thumb color1" data-letter="a"></div>
+          <p class="nav__label">TRISxTIONARY</p>
+        </a>
+      </li>
+      <li class="nav__item">
+        <a href="" class="nav__link">
+          <div class="nav__thumb color2" data-letter="e"></div>
+          <p class="nav__label">Kindies Version</p>
+        </a>
+      </li>
+      <li class="nav__item">
+        <a href="" class="nav__link">
+          <div class="nav__thumb color3" data-letter="c"></div>
+          <p class="nav__label">Grade 4+ <br> Version</p>
+        </a>
+      </li>
+      <li class="nav__item">
+        <a href="" class="nav__link">
+          <div class="nav__thumb color4" data-letter="a"></div>
+          <p class="nav__label">How to Play</p>
+        </a>
+      </li>
+
+    </ul>
+    <a href="http://ettrics.com/" class="logo" target="_blank">
+      <img class="logo" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/45226/ettrics-logo.svg" alt="" />
+    </a>
+  </nav>
+
+  <div class="page">
+    <section class="section section--active color1" data-letter="a">
+      <article class="section__wrapper">
+        <h1 class="section__title">Welcome to TRISxTIONARY</h1>
+        <h2>The game where you have to use your brain!</h2>
+        <p>Use your 'left' and 'right' arrow keys to navigate.</p>
+      </article>
+    </section>
+    <section class="section color2" data-letter="p">
+      <article class="section__wrapper">
+        <h1 class="section__title">Kindies Version</h1>
+        <p>Use your 'left' and 'right' arrow keys to navigate.</p>
+        <h1 style="width: 100%; word-wrap: normal;" class="section__title">"Call out a word that's..."</h1>
+      </article>
+      <div class="box-container">
+        <div id="tag-line">
+        </div>
+
+        <div class="deck yellow-deck" id="yellow-deck-kindies"
+          onclick="writeItem('yellow-deck-kindies', 'yellow-card-kindies'); flipCards('#yellow-deck-kindies', '.yellow-card-kindies')">
+          <div class="card yellow-card-kindies" id="yellow-card-kindies"></div>
+        </div>
+
+        <div class="deck blue-deck" id="blue-deck-kindies" onclick="writeItem('blue-deck-kindies', 'blue-card-kindies'); flipCards('#blue-deck-kindies', '.blue-card-kindies')">
+          <div class="card blue-card-kindies" id="blue-card-kindies"></div>
+        </div>
+        <div class="deck red-deck" id="red-deck-kindies" onclick="writeItem('red-deck-kindies', 'red-card-kindies'); flipCards('#red-deck-kindies', '.red-card-kindies')">
+          <div class="card red-card-kindies" id="red-card-kindies"></div>
+        </div>
+
+      </div>
+
+    </section>
+    <section class="section color3" data-letter="q">
+      <article class="section__wrapper">
+        <h1 class="section__title">Grade 4+ Version</h1>
+        <p>Use your 'left' and 'right' arrow keys to navigate.</p>
+        <h1 style="width: 100%; word-wrap: normal;" class="section__title">"Call out a word that's..."</h1>
+
+      </article>
+  
+      <div class="box-container">
+        <div id="tag-line">
+        </div>
+
+        <div class="deck yellow-deck" id="yellow-deck"
+          onclick="writeItem('yellow-deck', 'yellow-card'); flipCards('#yellow-deck', '.yellow-card')">
+          <div class="card yellow-card" id="yellow-card"></div>
+        </div>
+
+        <div class="deck blue-deck" id="blue-deck" onclick="writeItem('blue-deck', 'blue-card'); flipCards('#blue-deck', '.blue-card')">
+          <div class="card blue-card" id="blue-card"></div>
+        </div>
+        <div class="deck red-deck" id="red-deck" onclick="writeItem('red-deck', 'red-card'); flipCards('#red-deck', '.red-card')">
+          <div class="card red-card" id="red-card"></div>
+        </div>
+
+      </div>
+
+    </section>
+    <section class="section color4" data-letter="e">
+      <article class="section__wrapper">
+        <h1 class="section__title">How to play</h1>
+        <p>Use your 'left' and 'right' arrow keys to navigate.</p>
+      </article>
+    </section>
+
+  </div>
+
+
+</body>
+
+</html>
