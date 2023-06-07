@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Word Slider</title>
+  <style>
+    #word-container {
+      width: auto;
+      height: auto;
+      flex-flow: row wrap;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    #word {
+      white-space: nowrap;
+      transition: transform 0.5s ease;
+    }
+
+    .triangle {
+      cursor: pointer;
+    }
+
+    
+
+  </style>
+</head>
+<body>
+  <div id="word-container">
+      <div class="triangle" id="left-triangle">◀</div>
+      <form id="word"><div id="word">Picture</div></form>
+    <div class="triangle" id="right-triangle">▶</div>
+</div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      var words = ['Picture', 'Sound'];
+      var currentIndex = 0;
+
+      function slideToLeft() {
+        var word = $('#word');
+        word.css('transform', 'translateX(-100%)');
+        setTimeout(function() {
+          currentIndex = (currentIndex - 1 + words.length) % words.length;
+          word.text(words[currentIndex]);
+          word.css('transform', 'translateX(0)');
+        }, 500);
+      }
+
+      function slideToRight() {
+        var word = $('#word');
+        word.css('transform', 'translateX(100%)');
+        setTimeout(function() {
+          currentIndex = (currentIndex + 1) % words.length;
+          word.text(words[currentIndex]);
+          word.css('transform', 'translateX(0)');
+        }, 500);
+      }
+
+      $('#left-triangle').click(slideToLeft);
+      $('#right-triangle').click(slideToRight);
+    });
+  </script>
+</body>
+</html>

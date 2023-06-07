@@ -6,6 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="../static/soundboard/css/style.css">
 	<script src="../static/jquery-3.6.4.min.js"></script>
 	<script src="../static/soundboard/scripts/script.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
 	</style>
@@ -14,24 +15,26 @@
 <body>
 	<div class="container">
 
-		<h1 class="title">Grade 5A's Furry Fun Soundboard!</h1>
+		<h1 class="mint title">Grade 5A's Fun Soundboard!</h1>
 
 
-		<p class="title settings-menu">Please select which picture to update here:</p>
+		<p class="title settings-menu">Please select which <span class="settings-menu triangle" id="left-triangle">◀</span><span id="word" class="settings-menu">Picture</span><span class="settings-menu triangle" id="right-triangle">▶</span> to update:</p>
 		<form id="image_upload_form" class="settings-menu" method="POST" enctype="multipart/form-data">
 			{{form.hidden_tag()}}
 			{{form.file()}}
 			{{ form.image_submit }}
-			<label><input type="radio" name="radio_form" value="0" checked><span>Pic 1</span></label>
-			<label><input type="radio" name="radio_form" value="1"><span>Pic 2</span></label>
-			<label><input type="radio" name="radio_form" value="2"><span>Pic 3</span></label>
-			<label><input type="radio" name="radio_form" value="3"><span>Pic 4</span></label>
-			<label><input type="radio" name="radio_form" value="4"><span>Pic 5</span></label>
+			<div id="image_upload_status">
+				<label><input type="radio" name="radio_form" value="0" checked><span>Pic 1</span></label>
+				<label><input type="radio" name="radio_form" value="1"><span>Pic 2</span></label>
+				<label><input type="radio" name="radio_form" value="2"><span>Pic 3</span></label>
+				<label><input type="radio" name="radio_form" value="3"><span>Pic 4</span></label>
+				<label><input type="radio" name="radio_form" value="4"><span>Pic 5</span></label>
+			</div>
 		</form>
 
 
 
-		<div id="circle_container">
+		<div class="circle_container" id="circle_container">
 			{% for i in range(5) %}
 			<div class="circle" id="circle{{ i+1 }}">
 				{% if filename and radio_id == i|string %}
@@ -57,6 +60,7 @@
 		<audio id="audio4" src="{{ url_for('static', filename='../static/soundboard/sounds/punch.mp3')}}"></audio>
 		<audio id="audio5" src="{{ url_for('static', filename='../static/soundboard/sounds/store.mp3')}}"></audio>
 	</div>
-</body>
+	
+	</body>
 
 </html>
