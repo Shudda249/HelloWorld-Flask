@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, make_response
+from flask import Flask, render_template, request, make_response, jsonify
 from flask_wtf import FlaskForm
 from werkzeug.utils import secure_filename
 from wtforms import SubmitField, FileField
@@ -7,14 +7,14 @@ import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secretkey'
-app.config['ALLOWED_EXTENSIONS'] = {'jpg', 'jpeg', 'png', 'gif', 'wav', 'mp3'}
+app.config['ALLOWED_EXTENSIONS'] = {'jpg', 'jfif', 'jpeg', 'png', 'gif', 'wav', 'mp3'}
 app.config['UPLOAD_FOLDER'] = 'static/soundboard/'
 
 
 
 class FileForm(FlaskForm):
     file = FileField(label="File", validators=[InputRequired()])
-    image_submit = SubmitField(label="Upload Images Here")
+    image_submit = SubmitField(label="Then Click Here")
     sound_submit = SubmitField(label="Upload Sounds Here")
   
 
@@ -22,10 +22,20 @@ def allowed_file(filename):
     return '.' in filename and \
     filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
+
+@app.route("/chevron")
+def chev():
+    
+    word = request.values.get('word')
+    print(word)
+    return render_template("chevron.html")
+
+
 @app.route("/")
 @app.route("/index")
 def hello():
     return render_template("index.html")
+
 
 
 @app.route('/soundboard', methods=["GET", "POST"])

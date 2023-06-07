@@ -3,20 +3,15 @@ $(document).ready(function () {
 
 
 	$('.settings-menu').hide();
+	$('#sound-selector').hide();
 	$("#settings-button").click(function () {
 		$(".settings-menu").slideToggle('slow');
+		$("h1").toggleClass("title title2");
+		$("#circle_container").toggleClass("circle_container circle_container2");
 	});
 
-	/*$('#upload-img1, #upload-img2, #upload-img3, #upload-img4, upload-img5').on('change', function () {
-		const reader = new FileReader();
-		reader.onload = function (e) {
-			$('#img1').attr('src', e.target.result);
 
 
-		}
-		reader.readAsDataURL(this.files[0]);
-	});
-*/
 	const circle1 = document.getElementById('circle1');
 	const circle2 = document.getElementById('circle2');
 	const circle3 = document.getElementById('circle3');
@@ -55,8 +50,32 @@ $(document).ready(function () {
 	});
 
 
-	//Jquery for the video upload
-	// https://youtu.be/2b1AT4QW7BI
+	//Script for moving picture / sound selector
+	var words = ['Picture', 'Sound'];
+	var currentIndex = 0;
 
+	function slideToLeft() {
+		var word = $('#word');
+		word.css('transform', 'translateX(-100%)');
+		setTimeout(function () {
+			currentIndex = (currentIndex - 1 + words.length) % words.length;
+			word.text(words[currentIndex]);
+			word.css('transform', 'translateX(0)');
+		}, 500);
+	}
+
+	function slideToRight() {
+		var word = $('#word');
+		word.css('transform', 'translateX(100%)');
+		setTimeout(function () {
+			currentIndex = (currentIndex + 1) % words.length;
+			word.text(words[currentIndex]);
+			word.css('transform', 'translateX(0)');
+		}, 500);
+	}
+
+	$('#left-triangle').click(slideToLeft);
+	$('#right-triangle').click(slideToRight);
+	//End script for moving picture / sound selector
 });
 

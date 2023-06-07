@@ -31,24 +31,25 @@
 
 
 
-		{% for i in range(5) %}
-		<div class="circle" id="circle{{ i+1 }}">
-			{% if filename and radio_id == i|string %}
-			<img src="{{ url_for('static', filename='../static/soundboard/images/'+filename) }}" alt="image"
-				width="100%" height="100%">
+		<div id="circle_container">
+			{% for i in range(5) %}
+			<div class="circle" id="circle{{ i+1 }}">
+				{% if filename and radio_id == i|string %}
+				<img src="{{ url_for('static', filename='../static/soundboard/images/'+filename) }}" alt="image"
+					width="100%" height="100%">
 
-			{% elif request.cookies.get("radio_id['"+i|string+"']") %}
-			<img src="{{ url_for('static', filename='../static/soundboard/images/'+image_cookies[i]) }}" alt="image"
-				width="100%" height="100%">
+				{% elif request.cookies.get("radio_id['"+i|string+"']") %}
+				<img src="{{ url_for('static', filename='../static/soundboard/images/'+image_cookies[i]) }}" alt="image"
+					width="100%" height="100%">
 
-			{% else %}
-			<img src="{{ url_for('static', filename='soundboard/images/oscar.png')}}">
+				{% else %}
+				<img src="{{ url_for('static', filename='soundboard/images/oscar.png')}}">
 
-			{% endif %}
+				{% endif %}
+			</div>
+
+			{% endfor %}
 		</div>
-
-		{% endfor %}
-
 		<button id="settings-button">Settings</button>
 		<audio id="audio1" src="{{ url_for('static', filename='../static/soundboard/sounds/bonus.mp3')}}"></audio>
 		<audio id="audio2" src="{{ url_for('static', filename='../static/soundboard/sounds/ding.mp3')}}"></audio>
