@@ -18,6 +18,15 @@ body {
 	height: 100vh;
 }
 
+#file-upload-form{
+	position: absolute;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 25vh;
+
+}
 
 img {
 	object-fit:fill;
@@ -49,11 +58,6 @@ li {
 background-color: #999;
 }
 
-settings-menu{
-	position: absolute;
-	color: #dea9a9;
-}
-
 #settings-button {
 position: absolute;
 bottom: 0;
@@ -83,24 +87,26 @@ span {
 
 
 .circle_container{
+	position: absolute;
+	bottom: 20%;
 	display: flex;
-	flex-wrap: wrap;
-		flex-flow:row;
-		position: absolute;
-	bottom: 25%;
+	flex-flow:row;
+	align-items: flex-end;
 	transform: translateY(-20%);
 	transition: transform 0.5s ease;
+	height: 25vh;
 	}
 
 
 	.circle_container2{
 		display: flex;
 		flex-wrap: wrap;
-			flex-flow:row;
-			position: absolute;
+		flex-flow:row;
+		position: absolute;
 		bottom: 10%;
 		transform: translateY(20%);
-	transition: transform 0.5s ease;
+		transition: transform 0.5s ease;
+		height: 25vh;
 	}
 
 .circle {
@@ -126,9 +132,10 @@ form {
 	width: 100%;
 }
 
-#image_upload_status{
+#radio-id-selector {
 display: flex;
 	justify-content: center;
+	align-items: flex-end;
 	flex-flow: row;
 	padding: 0 1.5em;
 	width: 100%;
