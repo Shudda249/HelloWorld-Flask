@@ -2,6 +2,10 @@ $(document).ready(function () {
 
 
 
+
+
+
+
 	$('.settings-menu').hide();
 	$('#sound-selector').hide();
 	$("#settings-button").click(function () {
@@ -9,6 +13,50 @@ $(document).ready(function () {
 		$("h1").toggleClass("title title2");
 		$("#circle_container").toggleClass("circle_container circle_container2");
 	});
+
+
+	// Script for sending JSON argument for picture / sound choice
+	$('#image_submit').submit(function () {
+		var elementData = $('#word').text(); // Replace `myElement` with the ID or class of the HTML element you want to extract data from
+		$.ajax({
+			type: 'POST',
+			url: '/soundboard',  // Replace with the appropriate Flask route
+			contentType: "application/json",
+			dataType: "json",
+			data: {
+				media_type: elementData,
+
+			},
+			success: function (response) {
+				console.log(response);
+				// Handle the server response here
+			}
+		});
+	});
+
+
+	// Get the hidden input element
+	var hiddenInput = $('#hiddenInput');
+
+	// Get the left and right buttons
+	var leftButton = $('#left-triangle');
+	var rightButton = $('#right-triangle');
+
+	// Add click event listeners to the buttons
+	$(leftButton).add(rightButton).on('click', function () {
+		if ($('#word').text() == 'Picture') {
+			// Change the name of the hidden input element to "Picture"
+			hiddenInput.removeAttr('value', 'picture');
+			hiddenInput.attr('value', 'sound');
+		}
+		else if ($('#word').text() == 'Sound') {
+			// Change the name of the hidden input element to "Sound"
+			hiddenInput.removeAttr('value', 'sound');
+			hiddenInput.attr('value', 'picture');
+		}
+	});
+
+
 
 
 
@@ -74,8 +122,17 @@ $(document).ready(function () {
 		}, 500);
 	}
 
+
+
 	$('#left-triangle').click(slideToLeft);
 	$('#right-triangle').click(slideToRight);
-	//End script for moving picture / sound selector
+	// 
+
+
+
+
+
+
+
 });
 

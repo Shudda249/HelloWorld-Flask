@@ -1,7 +1,7 @@
-from flask import Flask, render_template, request, make_response, jsonify
+from flask import Flask, render_template, request, make_response
 from flask_wtf import FlaskForm
 from werkzeug.utils import secure_filename
-from wtforms import SubmitField, FileField
+from wtforms import SubmitField, FileField, HiddenField
 from wtforms.validators import InputRequired
 import os
 
@@ -15,20 +15,13 @@ app.config['UPLOAD_FOLDER'] = 'static/soundboard/'
 class FileForm(FlaskForm):
     file = FileField(label="File", validators=[InputRequired()])
     image_submit = SubmitField(label="Then Click Here")
-    sound_submit = SubmitField(label="Upload Sounds Here")
-  
+    hidden_field = HiddenField(label="Hidden Field", id="hiddenInput")
+
 
 def allowed_file(filename):
     return '.' in filename and \
     filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
-
-@app.route("/chevron")
-def chev():
-    
-    word = request.values.get('word')
-    print(word)
-    return render_template("chevron.html")
 
 
 @app.route("/")
@@ -37,37 +30,43 @@ def hello():
     return render_template("index.html")
 
 
-
+    
 @app.route('/soundboard', methods=["GET", "POST"])
 def uploadImage():
     form = FileForm()
     radio_id = request.form.getlist('radio_form')
     image_cookies = []
     filename = []
+    form.hidden_field.data = 'picture'
+    media_type = request.form.get('hidden_field')
+    
+          
 
     for i in range(5):
         cookie_name = f"radio_id['{i}']"
         image_cookie = request.cookies.get(cookie_name)
         image_cookies.append(image_cookie)
+
     
     if request.method == 'POST':
         if form.validate_on_submit():
             if form.image_submit.data and 'file' in request.files:    
-                file = request.files['file']
-                
+                file = request.files['file']              
                 if file and allowed_file(file.filename):
                     filename = secure_filename(form.file.data.filename)
-                    file.save(os.path.join(app.config["UPLOAD_FOLDER"], 'images', filename))  
+                    if media_type == 'picture':
+                        file.save(os.path.join(app.config["UPLOAD_FOLDER"], 'images', filename))  
+                    elif media_type == 'sound':
+                        file.save(os.path.join(app.config["UPLOAD_FOLDER"], 'sounds', filename))  
                     response = make_response(render_template('soundboard.html', form=form, radio_id=radio_id, filename=filename, image_cookies=image_cookies))
                     response.set_cookie(f'radio_id{radio_id}', filename, max_age=60*60*24*365*2)
-                    print(radio_id)
-                    return response        
+
+                    return response
+
+        else: 
+                        print('nope')        
         
-   
-    # If no image cookies are set, show the default images
-    print('RIGHT HERE')
- 
     return render_template('soundboard.html', filename=filename, form=form, radio_id=radio_id, image_cookies=image_cookies)
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
