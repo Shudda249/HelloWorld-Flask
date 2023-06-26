@@ -4,7 +4,6 @@ body {
 	background-color: #f5b44c;
 	height: 100%;
 	overflow: hidden;
-	
 }
 
 
@@ -16,6 +15,24 @@ body {
 	flex-flow: row wrap;
 	width: 100vw;
 	height: 100vh;
+}
+
+#editable-heading {
+position: absolute;
+top: 10%;
+width: 80%;
+padding: 12px 20px;
+margin: 8px 0;
+box-sizing: border-box;
+
+}
+
+#main-title{
+	cursor: pointer;
+}
+
+#font-selector {
+z-index: 9999;	
 }
 
 #file-upload-form{
@@ -67,7 +84,9 @@ left: 0;
 #file{
 	background-image: none;
 	box-shadow: none;
-	height: auto;
+	height: auto;	
+    font-family: cursive;
+
 	}
 
 
@@ -76,13 +95,11 @@ input, #image_submit{
 background-image: none;
 box-shadow: none;
 color: black;
+font-family: cursive;
+
 
 }
 
-span {
-	font-family: 'Acme', sans-serif;
-	font-size: 1.5em;
-}
 
 
 
@@ -147,6 +164,8 @@ label {
 	
 	text-align: center;
 	-webkit-tap-highlight-color: transparent;
+	color: whitesmoke;
+	font-family: cursive;
 }
 label:first-child input {
 	border-radius: 0.5em 0 0 0.5em;
@@ -174,7 +193,7 @@ label:last-child input:checked {
 		0 -0.1em 0 #ffffff3f, 0 0.1em 0 #ffffff7f,
 		-0.1em -0.1em 0 0.1em #ffffff7f inset;
 }
-input {
+input:not(#editable-heading, #image_submit, #file) {
 	background-image: linear-gradient(
 		#ffffff 33%,
 		#414751 58%,
@@ -236,9 +255,9 @@ margin: 30px 0px 0px 0px;
   .title {
 	position: absolute;
 	font-family: "Rocher";
-	font-size: 50px;
+	font-size: 7vh;
 	display: flex;
-	color: #FFFFFF;
+	color: lemonchiffon;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
@@ -252,8 +271,9 @@ margin: 30px 0px 0px 0px;
   .title2 {
 	position: absolute;
 	font-family: "Rocher";
+	color: lemonchiffon;
 	text-align: center;
-	font-size: 50px;
+	font-size: 7vh;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -286,10 +306,12 @@ margin: 30px 0px 0px 0px;
   }
 
   #word {
+	color: whitesmoke;
 	white-space: nowrap;
 	transition: transform 0.5s ease;
   }
 
   .triangle {
 	cursor: pointer;
+	z-index:9999;
   }

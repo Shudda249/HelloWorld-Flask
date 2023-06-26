@@ -1,8 +1,95 @@
 $(document).ready(function () {
 
+	// Script to chnage main title
+	$('#main-title').dblclick(function () {
+		var currentText = $(this).text();
+		$(this).hide();
+		$(this).after('<input type="text" id="editable-heading" value="' + currentText + '">');
+		$('#editable-heading').css('display', 'inline-block');
+
+		$('#editable-heading').focus();
+
+	});
+
+	$(document).on('blur', '#editable-heading', function () {
+		var newText = $(this).val();
+		$(this).prev('h1').text(newText);
+		$(this).prev('h1').show();
+		$(this).remove();
+	});
+
+	
+
+	//Script for checking and setting font and title cookies
+	// For font cookies
+	var fontCookie = getCookie("font");
+	if (fontCookie) {
+		loadFont(fontCookie);
+		$('#font').val(fontCookie);
+	}
+
+	$('#font-selector').change(function () {
+		var selectedFont = $(this).val();
+		loadFont(selectedFont);
+		setCookie("font", selectedFont, 30);
+	});
+
+	// For title cookies
+	var titleCookie = getCookie("title");
+	if (titleCookie) {
+		$('#main-title').val(titleCookie);
+	}
+
+	$('#main-title').change(function () {
+		var selectedTitle = $(this).val();
+		loadFont(selectedTitle);
+		setCookie("title", selectedTitle, 30);
+	});
 
 
 
+	function setCookie(name, value, days) {
+		var expires = "";
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+			expires = "; expires=" + date.toUTCString();
+		}
+		document.cookie = name + "=" + value + expires + "; path=/";
+	}
+
+	function getCookie(name) {
+		var cookies = document.cookie.split(';');
+		for (var i = 0; i < cookies.length; i++) {
+			var cookie = cookies[i].trim();
+			if (cookie.indexOf(name + '=') === 0) {
+				return cookie.substring(name.length + 1);
+			}
+		}
+		return '';
+	}
+
+
+	// Script for font selector
+	// Function to load the selected Google Font
+	function loadFont(fontFamily) {
+		var fontUrl = 'https://fonts.googleapis.com/css?family=' + fontFamily.replace(' ', '+');
+		$('<link/>', {
+			rel: 'stylesheet',
+			type: 'text/css',
+			href: fontUrl
+		}).appendTo('head');
+		$('.title, .title2').css('font-family', fontFamily);
+	}
+
+	// Function to change the website's font
+	function changeFont() {
+		var selectedFont = $('#font-selector').val();
+		loadFont(selectedFont);
+	}
+
+	// Event listener for font selection change
+	$('#font-selector').on('change', changeFont);
 
 
 
@@ -14,25 +101,6 @@ $(document).ready(function () {
 		$("#circle_container").toggleClass("circle_container circle_container2");
 	});
 
-
-	// Script for sending JSON argument for picture / sound choice
-	$('#image_submit').submit(function () {
-		var elementData = $('#word').text(); // Replace `myElement` with the ID or class of the HTML element you want to extract data from
-		$.ajax({
-			type: 'POST',
-			url: '/soundboard',  // Replace with the appropriate Flask route
-			contentType: "application/json",
-			dataType: "json",
-			data: {
-				media_type: elementData,
-
-			},
-			success: function (response) {
-				console.log(response);
-				// Handle the server response here
-			}
-		});
-	});
 
 
 	// Get the hidden input element
@@ -127,9 +195,6 @@ $(document).ready(function () {
 	$('#left-triangle').click(slideToLeft);
 	$('#right-triangle').click(slideToRight);
 	// 
-
-
-
 
 
 

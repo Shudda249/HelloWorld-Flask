@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Changer</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      var images = [];
+      var names = [];
+      var currentIndex = 0;
+      
+      $("#submitBtn").click(function() {
+        var imageUrl = $("#imageUrlInput").val();
+        var objectName = $("#objectNameInput").val();
+        
+        if (imageUrl && objectName) {
+          images.push(imageUrl);
+          names.push(objectName);
+          $("#imageUrlInput").val('');
+          $("#objectNameInput").val('');
+        }
+      });
+      
+      $("#previousBtn").click(function() {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateImageAndName();
+        }
+      });
+      
+      $("#nextBtn").click(function() {
+        if (currentIndex < images.length - 1) {
+          currentIndex++;
+          updateImageAndName();
+        }
+      });
+      
+      function updateImageAndName() {
+        var imageUrl = images[currentIndex];
+        var objectName = names[currentIndex];
+        $("#image").attr("src", imageUrl);
+        $("#objectName").text(objectName);
+      }
+    });
+  </script>
+</head>
+<body>
+  <h2>Image Changer</h2>
+  <input type="text" id="imageUrlInput" placeholder="Enter Google Image Address">
+  <input type="text" id="objectNameInput" placeholder="Enter Object Name">
+  <button id="submitBtn">Submit</button>
+  
+  <hr>
+  
+  <h3>Result:</h3>
+  <button id="previousBtn">Previous</button>
+  <button id="nextBtn">Next</button>
+  <br>
+  <img id="image" src="" alt="Object Image">
+  <p id="objectName"></p>
+</body>
+</html>
