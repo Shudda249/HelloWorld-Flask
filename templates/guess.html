@@ -1,21 +1,136 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+  <title>Image Changer</title>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="../static/guess/scripts/guess.js"></script>
-  <link rel="stylesheet" href="../static/guess/css/style.css">
-  
+  <script>
+    $(document).ready(function () {
+      var images = [];
+      var names = [];
+      var currentIndex = 0;
+      var revealedIndex = 0;
+
+      $("#submitBtn").click(function () {
+        var imageUrl = $("#imageUrlInput").val();
+        var objectName = $("#objectNameInput").val();
+
+        if (imageUrl && objectName) {
+          images.push(imageUrl);
+          names.push(objectName);
+          $("#imageUrlInput").val('');
+          $("#objectNameInput").val('');
+        }
+      });
+
+      $("#previousBtn").click(function () {
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateImageAndName();
+          $('#image').hide();
+        
+          revealedIndex = 0
+        
+
+        }
+      });
+
+      $("#nextBtn").click(function () {
+        if (currentIndex < images.length - 1) {
+          currentIndex++;
+          updateImageAndName();
+          revealedIndex = 0
+          $('#image').hide();
+         
+
+
+        }
+      });
+
+      $('#showBtn').click(function () {
+        $('#image').toggle();
+     
+      });
+
+      $(document).keydown(function (e) {
+        if (e.keyCode == 37) { // left
+          if (currentIndex > 0) {
+            currentIndex--;
+            updateImageAndName();
+          }
+        } else if (e.keyCode == 39) { // right
+          if (currentIndex < images.length - 1) {
+            currentIndex++;
+            updateImageAndName();
+          }
+        } else if (e.keyCode == 32 || e.keyCode == 13) { // space or enter
+          $('#image').toggle();
+        
+        }
+      });
+
+      function updateImageAndName() {
+        var imageUrl = images[currentIndex];
+        var objectName = names[currentIndex];
+        $("#image").attr("src", imageUrl);
+        $("#objectName").text(objectName);
+        $('#objectName').hide();
+        $('#con').attr("style", "background-color: yellow; width: 100px; height: 100px;")
+        revealedIndex = 0;
+      }
+
+      $("#con").click(function() {
+        $("#objectName").show();
+        if (revealedIndex < names[currentIndex].length) {
+          var revealedName = names[currentIndex].substr(0, revealedIndex + 1);
+          $('#objectName').text(revealedName);
+          revealedIndex++;
+        }
+      });
+
+      $("#hideBtn").click(function() {
+        $("#inputField").toggle();
+      });
+
+    });
+  </script>
+  <style>
+body {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#imageContainer {
+  display: flex;
+  flex: 1 1 33%;
+  flex-direction: row wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+  </style>
 </head>
+
 <body>
-    <h1>Guessing Game</h1>
-  <form>
-    <input type="text" id="textbox1" placeholder="Enter a string">
-    <br>
-    <input type="text" id="textbox2" placeholder="Enter another string">
-    <br>
-    <button type="submit" id="submitBtn">Submit</button>
-  </form>
-  <img src="../static/guess/images/1.png" alt="1" id="myImg">
-  <p id="result"></p>
+  <h2>Image Changer</h2>
+  <div id="inputField">
+  <input type="text" id="imageUrlInput" placeholder="Enter Google Image Address">
+  <input type="text" id="objectNameInput" placeholder="Enter Object Name">
+  <button id="submitBtn">Submit</button>
+</div>
+<button id="hideBtn">Hide</button>
+  <hr>
+<div id="imageContainer">
+  <h3>Result:</h3>
+  <button id="previousBtn">Previous</button>
+  <button id="showBtn">Show</button>
+  <button id="nextBtn">Next</button></div>
+  <br>
+  <img id="image" src="" >
+  <div id="con"><p id="objectName"></p></div>
 </body>
+
 </html>

@@ -1,62 +1,146 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>Image Changer</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      var images = [];
-      var names = [];
-      var currentIndex = 0;
-      
-      $("#submitBtn").click(function() {
-        var imageUrl = $("#imageUrlInput").val();
-        var objectName = $("#objectNameInput").val();
-        
-        if (imageUrl && objectName) {
-          images.push(imageUrl);
-          names.push(objectName);
-          $("#imageUrlInput").val('');
-          $("#objectNameInput").val('');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <head>
+    <title>Image Changer</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script>
+      $(document).ready(function () {
+        var images = [];
+        var names = [];
+        var currentIndex = 0;
+        var revealedIndex = 0;
+
+        $("#submitBtn").click(function () {
+          var imageUrl = $("#imageUrlInput").val();
+          var objectName = $("#objectNameInput").val();
+
+          if (imageUrl && objectName) {
+            images.push(imageUrl);
+            names.push(objectName);
+            $("#imageUrlInput").val('');
+            $("#objectNameInput").val('');
+          }
+        });
+
+        $("#previousBtn").click(function () {
+          if (currentIndex > 0) {
+            currentIndex--;
+            updateImageAndName();
+            $('#image').hide();
+
+            revealedIndex = 0
+
+
+          }
+        });
+
+        $("#nextBtn").click(function () {
+          if (currentIndex < images.length - 1) {
+            currentIndex++;
+            updateImageAndName();
+            revealedIndex = 0
+            $('#image').hide();
+
+          }
+        });
+
+        $('#showBtn').click(function () {
+          $('#image').toggle();
+
+        });
+
+        $(document).keydown(function (e) {
+          if (e.keyCode == 37) { // left
+            if (currentIndex > 0) {
+              currentIndex--;
+              updateImageAndName();
+            }
+          } else if (e.keyCode == 39) { // right
+            if (currentIndex < images.length - 1) {
+              currentIndex++;
+              updateImageAndName();
+            }
+          } else if (e.keyCode == 32 || e.keyCode == 13) { // space or enter
+            $('#image').toggle();
+
+          }
+        });
+
+        function updateImageAndName() {
+          var imageUrl = images[currentIndex];
+          var objectName = names[currentIndex];
+          $("#image").attr("src", imageUrl);
+          $("#objectName").text(objectName);
+          $('#objectName').hide();
+          $('#con').attr("style", "background-color: yellow; width: 100px; height: 100px;")
+          revealedIndex = 0;
         }
+
+        $("#name-container").click(function () {
+          $("#objectName").show();
+          if (revealedIndex < names[currentIndex].length) {
+            var revealedName = names[currentIndex].substr(0, revealedIndex + 1);
+            $('#objectName').text(revealedName);
+            revealedIndex++;
+          }
+        });
+
+        $("#hideBtn").click(function () {
+          $("#inputField").toggle("slide");
+        });
+
       });
-      
-      $("#previousBtn").click(function() {
-        if (currentIndex > 0) {
-          currentIndex--;
-          updateImageAndName();
-        }
-      });
-      
-      $("#nextBtn").click(function() {
-        if (currentIndex < images.length - 1) {
-          currentIndex++;
-          updateImageAndName();
-        }
-      });
-      
-      function updateImageAndName() {
-        var imageUrl = images[currentIndex];
-        var objectName = names[currentIndex];
-        $("#image").attr("src", imageUrl);
-        $("#objectName").text(objectName);
-      }
-    });
-  </script>
-</head>
+    </script>
+
+  </head>
+
 <body>
-  <h2>Image Changer</h2>
-  <input type="text" id="imageUrlInput" placeholder="Enter Google Image Address">
-  <input type="text" id="objectNameInput" placeholder="Enter Object Name">
-  <button id="submitBtn">Submit</button>
-  
+
+  <div class="container border">
+    <div class="row">
+      <h2>Image Changer</h2>
+    </div>
+    <div id="inputField" class="col text-end">
+      <input type="text" id="imageUrlInput" placeholder="Enter Google Image Address">
+      <input type="text" id="objectNameInput" placeholder="Enter Object Name">
+      <button id="submitBtn">Submit</button>
+    </div>
+    <div class="col text-start d-flex align-items-end">
+      <button id="hideBtn">Hide</button>
+    </div>
+  </div>
   <hr>
-  
-  <h3>Result:</h3>
-  <button id="previousBtn">Previous</button>
-  <button id="nextBtn">Next</button>
+
+  <div class="row">
+    <div class="col">
+      <h3>Result:</h3>
+      <button id="previousBtn">Previous</button>
+      <button id="showBtn">Show</button>
+      <button id="nextBtn">Next</button>
+    </div>
+  </div>
   <br>
-  <img id="image" src="" alt="Object Image">
-  <p id="objectName"></p>
+  <div class="row">
+    <div class="col">
+      <h3>Image:</h3>
+      <img id="image" src="">
+    </div>
+    <div style="cursor: pointer;" id="name-container"
+      class="col bg-info d-flex justify-content-center align-items-center">
+      <h1 id="objectName"></h1>
+    </div>
+  </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
 </body>
+
 </html>
