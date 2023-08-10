@@ -16,6 +16,7 @@ $(document).ready(function () {
 		$(this).prev('h1').text(newText);
 		$(this).prev('h1').show();
 		$(this).remove();
+		setCookie("title", newText, 30);
 	});
 
 	
@@ -37,12 +38,11 @@ $(document).ready(function () {
 	// For title cookies
 	var titleCookie = getCookie("title");
 	if (titleCookie) {
-		$('#main-title').val(titleCookie);
+		$('#main-title').text(titleCookie);
 	}
 
 	$('#main-title').change(function () {
-		var selectedTitle = $(this).val();
-		loadFont(selectedTitle);
+		var selectedTitle = $(this).text();
 		setCookie("title", selectedTitle, 30);
 	});
 
