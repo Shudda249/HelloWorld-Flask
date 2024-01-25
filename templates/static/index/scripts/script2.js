@@ -5,7 +5,7 @@
 const blueDeck = ["Is a compound word", "Has two vowels next to each other",
   "Is not a plural word", "Is three or four letters long", "Has exactly four syllables", "Does not have more than three different consonants", "Has a double consonant", "Has an even number of letters", "Has an odd number of letters", "Has an equal number of vowels and consonants", "Is exactly eight letters long", "Has exactly one syllable", "Has at least two different vowels", "Has a double vowel", "Has a double letter", "Is exactly nine letters long"];
 
-const yellowDeck = ["The title of TV show", "Associated with music", "Associated with money", "Associated with school", "Associated with sports", "Associated with parties", "Associated with the beach", "Associated with vacations", "Associated with literature", "An item found in a kitchen", "A type of animal", "Associated with space", "Associated with countries", "An item found at the office", "A type of food"];
+const yellowDeck = ["Associated with the human body","The title of TV show", "Associated with music", "Associated with money", "Associated with school", "Associated with sports", "Associated with parties", "Associated with the beach", "Associated with vacations", "Associated with literature", "An item found in a kitchen", "A type of animal", "Associated with space", "Associated with countries", "An item found at the office", "A type of food"];
 
 const redDeck = ["Begins with the letter A", "Begins with the letter P", "Begins with the letter T", "Begins with the letter S", "Cannot contain the letter L", "Ends with the letter E", "Ends with the letter R", "Contains the letter C", "Contains the letter H", "Contains the letter J", "Contains the letters PL", "Contains the letter V"];
 
