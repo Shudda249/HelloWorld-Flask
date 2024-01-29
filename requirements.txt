@@ -3,7 +3,7 @@ blinker==1.4
 certifi==2023.5.7
 charset-normalizer==3.1.0
 click==8.0.3
-command-not-found==0.3
+colorama==0.4.4
 cryptography==3.4.8
 dbus-python==1.2.18
 distro==1.7.0
