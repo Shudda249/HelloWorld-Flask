@@ -3,11 +3,12 @@
 
 <head>
 	<title>Play Custom Sound on Click</title>
-	<link rel="stylesheet" type="text/css" href="../static/soundboard/css/style.css">
-	<script src="../static/jquery-3.6.4.min.js"></script>
-	<script src="../static/soundboard/scripts/script.js"></script>
-	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"
-		integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
+	<script src="{{ url_for('static',filename='soundboard/scripts/script.js') }}" defer></script>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='soundboard/css/style.css') }}">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script src="{{ url_for('static', filename='jquery-3.6.4.min.js') }}"></script>
+
 	<style>
 		@import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Gamja+Flower&family=Hachi+Maru+Pop&family=Permanent+Marker&family=Schoolbell&family=Sedgwick+Ave&family=Acme+Display&display=swap');
 	</style>
