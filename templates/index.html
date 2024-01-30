@@ -12,9 +12,9 @@
     @import url('https://fonts.googleapis.com/css2?family=Sigmar&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
   </style>
-  <script src="../static/index/scripts/script-nav.js" defer></script>
-  <script src="../static/index/scripts/script2.js" defer></script>
-  <script src="../static/jquery-3.6.4.min.js"></script>
+  <script src="{{ url_for('static',filename='index/scripts/script-nav.js') }}" defer></script>
+  <script src="{{ url_for('static',filename='index/scripts/script2.js') }}" defer></script>
+  <script src="{{ url_for('static',filename='jquery-3.6.4.min.js') }}"></script>
 
 </head>
 
