@@ -11,10 +11,28 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Sigmar&display=swap');
     @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
+
+    /* Styles for desktop */
+    @media (min-width: 1024px) {
+      /* Add your desktop-specific styles here */
+    }
+
+    /* Styles for tablets */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      /* Add your tablet-specific styles here */
+    }
+
+    /* Styles for mobile devices */
+    @media (max-width: 767px) {
+      /* Add your mobile-specific styles here */
+    }
+  </style>
+
   </style>
   <script src="{{ url_for('static',filename='index/scripts/script-nav.js') }}" defer></script>
   <script src="{{ url_for('static',filename='index/scripts/script2.js') }}" defer></script>
   <script src="{{ url_for('static',filename='jquery-3.6.4.min.js') }}"></script>
+
 
 </head>
 
